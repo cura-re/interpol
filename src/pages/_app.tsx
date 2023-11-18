@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { NextUIProvider, useSSR } from '@nextui-org/react';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
@@ -7,7 +7,7 @@ import ReactLoading from "react-loading";
 
 import Layout from '../components/layout/layout.component';
 import StyledComponentsRegistry from '../components/registry/registry.component';
-import '../styles/globals.css';
+// import '../styles/globals.css';
 import { persistor, store, wrapper } from '../store/store';
 
 function App({ Component, ...rest }: AppProps) {

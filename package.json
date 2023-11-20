@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.13",
+    "@types/react-responsive-masonry": "^2.1.0",
     "@types/redux-logger": "^3.0.11",
     "axios": "^1.6.2",
     "framer-motion": "^10.16.5",
+    "fs": "^0.0.1-security",
     "next": "14.0.0",
     "next-redux-wrapper": "^8.1.0",
     "react": "^18",
@@ -27,8 +29,7 @@
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.2.3",
     "styled-components": "^6.1.0",
-    "typed-redux-saga": "^1.5.0",
-    "@types/react-responsive-masonry": "^2.1.0"
+    "typed-redux-saga": "^1.5.0"
   },
   "devDependencies": {
     "@types/node": "^20",

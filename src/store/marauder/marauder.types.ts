@@ -19,7 +19,7 @@ export enum MARAUDER_ACTION_TYPES  {
 
 export type Marauder = {
     userId: string;
-    username: string;
+    userName: string;
     firstName: string;
     lastName: string;
     dateOfBirth: string;
@@ -27,7 +27,7 @@ export type Marauder = {
     password: string;
     about: string;
     imageLink: string;
-    imageSource: string;
+    imageData: Int32Array;
     type: string;
     dateCreated: Date;
     posts: Post[];

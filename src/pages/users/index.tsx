@@ -1,9 +1,12 @@
-export class UsersPage {
+import { Component } from "react";
+import UsersComponent from "../../components/users/users.component";
+
+class UsersPage extends Component {
     render() {
         return (
-            <>
-            <h1>Users</h1>
-            </>
+            <UsersComponent/>
         )
     }
 }
+
+export default UsersPage;

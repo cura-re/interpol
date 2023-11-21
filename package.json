@@ -10,11 +10,12 @@
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.13",
+    "@types/react-dom": "18.0.9",
     "@types/react-responsive-masonry": "^2.1.0",
     "@types/redux-logger": "^3.0.11",
+    "@types/three": "^0.152.1",
     "axios": "^1.6.2",
     "framer-motion": "^10.16.5",
-    "fs": "^0.0.1-security",
     "next": "14.0.0",
     "next-redux-wrapper": "^8.1.0",
     "react": "^18",
@@ -32,9 +33,11 @@
     "typed-redux-saga": "^1.5.0"
   },
   "devDependencies": {
+    "@react-three/editor": "^0.0.16",
     "@types/node": "^20",
     "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/web-bluetooth": "^0.0.17",
+    "encoding": "^0.1.13",
     "eslint": "^8",
     "eslint-config-next": "14.0.0",
     "typescript": "^5"

@@ -2,11 +2,14 @@ import axios from "axios";
 import { Marauder } from "../../store/marauder/marauder.types";
 import { User } from "../../store/user/user.types";
 
-const api = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/user`;
+const api = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/users`;
 
 const headers = {
   'Accept': 'application/x-www-form-urlencoded',
-  'Content-Type': 'application/x-www-form-urlencoded'
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Cache-Control': 'no-cache',
+  'Pragma': 'no-cache',
+  'Expires': '0'
 }
 
 export async function getSingleUser(userId: string | undefined): Promise<User> {

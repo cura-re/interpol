@@ -1,4 +1,4 @@
-import { all, call } from 'typed-redux-saga/macro';
+import { all, call } from 'typed-redux-saga';
 
 import { actionSagas } from './action/action.saga';
 import { artificialIntelligenceSagas } from './artificialintelligence/artificialintelligence.saga';
@@ -33,37 +33,37 @@ import { gltfCommentSagas } from './gltfcomment/gltfcomment.saga';
 import { userChatCommentSagas } from './userchatcomment/userchatcomment.saga';
 
 export function* rootSaga() {
-  // yield* all([
-  //   call(actionSagas), 
-  //   call(artificialIntelligenceSagas),
-  //   call(artificialIntelligenceChatSagas),
-  //   call(channelSagas),
-  //   call(channelcommentSagas),
-  //   call(chatSagas), 
-  //   call(chatCommentSagas), 
-  //   call(commentSagas), 
-  //   call(communitySagas), 
-  //   call(communityCommentSagas), 
-  //   call(communityPostSagas), 
-  //   call(deviceSagas), 
-  //   call(docFileSagas), 
-  //   call(favoriteSagas), 
-  //   call(followerSagas), 
-  //   call(gltfSagas), 
-  //   call(gltfCommentSagas), 
-  //   call(marauderSagas), 
-  //   call(memberSagas), 
-  //   call(messageSagas), 
-  //   call(messageCommentSagas), 
-  //   call(moveableSagas), 
-  //   call(noteSagas), 
-  //   call(panelSagas), 
-  //   call(pinSagas), 
-  //   call(postSagas), 
-  //   call(shapeSagas), 
-  //   call(toolSagas), 
-  //   call(userChatCommentSagas),
-  //   call(userSagas),
-  //   call(userprofileSagas)
-  // ]);
+  yield* all([
+    // call(actionSagas), 
+    // call(artificialIntelligenceSagas),
+    // call(artificialIntelligenceChatSagas),
+    // call(channelSagas),
+    // call(channelcommentSagas),
+    // call(chatSagas), 
+    // call(chatCommentSagas), 
+    // call(commentSagas), 
+    // call(communitySagas), 
+    // call(communityCommentSagas), 
+    // call(communityPostSagas), 
+    // call(deviceSagas), 
+    // call(docFileSagas), 
+    // call(favoriteSagas), 
+    // call(followerSagas), 
+    // call(gltfSagas), 
+    // call(gltfCommentSagas), 
+    call(marauderSagas), 
+    // call(memberSagas), 
+    // call(messageSagas), 
+    // call(messageCommentSagas), 
+    // call(moveableSagas), 
+    // call(noteSagas), 
+    // call(panelSagas), 
+    // call(pinSagas), 
+    // call(postSagas), 
+    // call(shapeSagas), 
+    // call(toolSagas), 
+    // call(userChatCommentSagas),
+    // call(userSagas),
+    // call(userprofileSagas)
+  ]);
 }

@@ -1,7 +1,10 @@
 import axios from "axios";
-import { Component } from "react";
+import { Component, Dispatch } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Row, Col, Image, Card } from "react-bootstrap";
+import { ConnectedProps, connect } from "react-redux";
+import { MarauderFetchAllStart, MarauderFetchSingleStart, marauderFetchAllStart, marauderFetchSingleStart } from "../../store/marauder/marauder.action";
+import { RootState } from "../../store/store";
 
 interface IUser {
   userId: string;
@@ -14,6 +17,9 @@ interface IUser {
 interface ISignIn {
   users: Array<IUser>;
 }
+
+type MarauderProps = ConnectedProps<typeof connector>;
+
 async function getUser(userId: string): Promise<Array<IUser>> {
   const res = await fetch(
       `http://localhost:5274/users/${userId}`,
@@ -30,15 +36,14 @@ async function getUser(userId: string): Promise<Array<IUser>> {
   return data;
 }
 
-class Index extends Component<{}, ISignIn> {
+class Interpoler extends Component<MarauderProps, ISignIn> {
   public toggle: boolean = true;
   public title: string = "Change Me";
-  constructor(props: {}) {
+  constructor(props: MarauderProps) {
     super(props);
     this.state = {
       users: []
     };
-    this.getUsers = this.getUsers.bind(this);
   }
   async getUsers(): Promise<IUser[]> {
     const headers = {
@@ -64,9 +69,11 @@ class Index extends Component<{}, ISignIn> {
   
   componentDidMount(): void {
     this.getUsers();
+    this.props.getAll();
   }
 
   render() {
+    const { marauders } = this.props
     return (
       <>
       <h1>{this.title}</h1>
@@ -75,7 +82,7 @@ class Index extends Component<{}, ISignIn> {
       >
         <Masonry>
         {
-          this.state.users.map(({ userId, userName, firstName, about, imageData }, index: number) => {
+          marauders?.map(({ userId, userName, firstName, about, imageData }, index: number) => {
             return (
               <Card style={{ margin: '1rem' }} key={userId}>
                 <Card.Img style={{ borderRadius: '.5rem'}} src={imageData ? `data:image/png;base64, ${imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
@@ -97,4 +104,18 @@ class Index extends Component<{}, ISignIn> {
   }
 }
 
-export default Index;
+const mapStateToProps = (state: RootState) => {
+  return { 
+    marauders: state.marauder.marauders,
+    messages: state.message
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<MarauderFetchAllStart | MarauderFetchSingleStart>) => ({
+  getAll: () => dispatch(marauderFetchAllStart()),
+  getMarauder: (userId: string ) => dispatch(marauderFetchSingleStart(userId)),
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+export default connector(Interpoler);

@@ -85,7 +85,9 @@ class Interpoler extends Component<MarauderProps, ISignIn> {
           marauders?.map(({ userId, userName, firstName, about, imageData }, index: number) => {
             return (
               <Card style={{ margin: '1rem' }} key={userId}>
-                <Card.Img style={{ borderRadius: '.5rem'}} src={imageData ? `data:image/png;base64, ${imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
+                <a href={`/users/${userId}`}>
+                  <Card.Img style={{ borderRadius: '.5rem'}} src={imageData ? `data:image/png;base64, ${imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
+                </a>
                 <Card.ImgOverlay>
                   <Card.Title>{userName}</Card.Title>
                   <Card.Body>
@@ -111,9 +113,8 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<MarauderFetchAllStart | MarauderFetchSingleStart>) => ({
-  getAll: () => dispatch(marauderFetchAllStart()),
-  getMarauder: (userId: string ) => dispatch(marauderFetchSingleStart(userId)),
+const mapDispatchToProps = (dispatch: Dispatch<MarauderFetchAllStart>) => ({
+  getAll: () => dispatch(marauderFetchAllStart())
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

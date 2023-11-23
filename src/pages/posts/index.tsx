@@ -1,17 +1,21 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { Card } from "react-bootstrap";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { Marauder } from "../../store/marauder/marauder.types";
+import { Post } from "../../store/post/post.types";
+import { User } from "../../store/user/user.types";
 
-interface IUser {
-  userId: string;
-  userName: string;
-  firstName: string;
-  about: string;
-  imageData: Int32Array;
+interface IPost {
+  postId: number;
+  postContent: string | null;
+  imageData: Int32Array | null;
+  imageLink: string;
+  type: string;
+  dateCreated: Date;
+  user: User,
+  comments: Comment[];
 }
 
-function Interpoler({
+function Posts({
   data
 }: InferGetServerSidePropsType<typeof getServerSideProps>) { 
   return (
@@ -21,17 +25,19 @@ function Interpoler({
     >
       <Masonry>
       {
-        data?.map(({ userId, userName, firstName, about, imageData }: Marauder, index: number) => {
+        data?.map(({ postId, postContent, imageLink, dateCreated, imageData, user }: Post, index: number) => {
           return (
-            <Card style={{ margin: '1rem' }} key={userId}>
-              <a href={`/users/${userId}`}>
+            <Card style={{ margin: '1rem' }} key={postId}>
+              <a href={`/posts/${postId}`}>
                 <Card.Img style={{ borderRadius: '.5rem'}} src={imageData ? `data:image/png;base64, ${imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
               </a>
               <Card.ImgOverlay>
-                <Card.Title>{userName}</Card.Title>
+                <Card.Title>{postContent}</Card.Title>
                 <Card.Body>
-                  <Card.Text>{firstName}</Card.Text>
-                  <Card.Text>{about}</Card.Text>
+                  <Card.Text>{imageLink}</Card.Text>
+                  <a href={`/users/${user.userId}`}>
+                  <Card.Text>{user.userName}</Card.Text>
+                  </a>
                 </Card.Body>
               </Card.ImgOverlay>
             </Card>
@@ -47,7 +53,7 @@ function Interpoler({
 export const getServerSideProps = (async (context) => {
     const { id } = context.query;
     const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/users`,
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/posts`,
         {
             method: "GET",
             headers: {
@@ -67,7 +73,7 @@ export const getServerSideProps = (async (context) => {
 
     return { props: { data }};
 }) satisfies GetServerSideProps<{
-    data: Array<IUser>
+    data: Array<IPost>
 }>;
 
-export default Interpoler;
+export default Posts;

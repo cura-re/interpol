@@ -25,9 +25,9 @@ export enum POST_ACTION_TYPES  {
 
 export type Post = {
     postId: number;
-    postValue: string | null;
-    mediaLink: string | null;
-    imageSource: string;
+    postContent: string | null;
+    imageData: Int32Array | null;
+    imageLink: string;
     type: string;
     dateCreated: Date;
     userId: string | null,

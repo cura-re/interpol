@@ -10,7 +10,7 @@ type Props  = SidebarMenuProps & {
 }
 
 export class Layout extends Component<Props> {
-  static displayName = Layout.name;
+  public static displayName = Layout.name;
 
   render() {
     return (

@@ -11,7 +11,7 @@ interface IPost {
     dateCreated: Date;
     user: User,
     comments: Comment[];
-  }
+}
 
 function Posts({
   data
@@ -46,7 +46,6 @@ export const getServerSideProps = (async (context) => {
         }
     );
     const data = await res.json();
-
     if (!data) {
         return {
             notFound: true,

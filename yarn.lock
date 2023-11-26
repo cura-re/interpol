@@ -5106,6 +5106,11 @@ watchpack@2.4.0:
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.1.2"
 
+wavesurfer.js@^7.4.6:
+  version "7.4.6"
+  resolved "https://registry.yarnpkg.com/wavesurfer.js/-/wavesurfer.js-7.4.6.tgz#5fd381c773d2e184b2def732fabe41aa3ce767e5"
+  integrity sha512-uQDw132ucreP6rqJKou9vWe59QPZQ4PGftQml58JbwMzna4pJjUxXDZv+ubV7LJBkX1kaO/9BEmBRpmR64O3rQ==
+
 webgl-constants@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/webgl-constants/-/webgl-constants-1.1.1.tgz#f9633ee87fea56647a60b9ce735cbdfb891c6855"

@@ -30,7 +30,8 @@
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.2.3",
     "styled-components": "^6.1.0",
-    "typed-redux-saga": "^1.5.0"
+    "typed-redux-saga": "^1.5.0",
+    "wavesurfer.js": "^7.4.6"
   },
   "devDependencies": {
     "@react-three/editor": "^0.0.16",

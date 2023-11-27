@@ -51,7 +51,7 @@ export const getServerSideProps = (async (context) => {
 
     return { props: { data }};
 }) satisfies GetServerSideProps<{
-    data: Array<IUser>
+    data: IUser
 }>;
 
 export default Page;

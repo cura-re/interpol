@@ -7,6 +7,12 @@ interface IState {
 
 }
 
+type WaveSurferProps = {
+  audioId: string;
+  fileName: string;
+  audioData: Int32Array;
+}
+
 const options = {
     /** HTML element or CSS selector (required) */
     container: 'body',
@@ -41,7 +47,7 @@ const options = {
     /** Stretch the waveform to fill the container, true by default */
     fillParent: true,
     /** Audio URL */
-    url: '/examples/audio/audio.wav',
+    url: "https://api.twilio.com//2010-04-01/Accounts/AC25aa00521bfac6d667f13fec086072df/Recordings/RE6d44bc34911342ce03d6ad290b66580c.mp3",
     /** Whether to show default audio element controls */
     mediaControls: true,
     /** Play the audio on load */
@@ -49,7 +55,7 @@ const options = {
     /** Pass false to disable clicks on the waveform */
     interact: true,
     /** Allow to drag the cursor to seek to a new position */
-    dragToSeek: false,
+    dragToSeek: true,
     /** Hide the scrollbar */
     hideScrollbar: false,
     /** Audio rate */
@@ -62,44 +68,135 @@ const options = {
     sampleRate: 8000,
 }
 
-class Index extends Component<{}, IState> {
+class DisplayWave extends Component<WaveSurferProps, IState> {
   private wavesurfer: WaveSurfer | null = null;
   private waveformRef = createRef<HTMLDivElement>();
-  constructor(props: {}) {
+  private audio = new Audio();
+  private audioContext: AudioContext | null;
+  private audioRef: React.RefObject<HTMLAudioElement>;
+  private eqBands: Array<number> = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
+  private filters: Array<BiquadFilterNode> | null;
+  //  = this.eqBands.map((band) => {
+  //   const filter = this.audioContext.createBiquadFilter()
+  //   filter.type = band <= 32 ? 'lowshelf' : band >= 16000 ? 'highshelf' : 'peaking'
+  //   filter.gain.value = Math.random() * 40 - 20
+  //   filter.Q.value = 1 // resonance
+  //   filter.frequency.value = band // the cut-off frequency
+  //   return filter
+  // });
+  constructor(props: WaveSurferProps) {
     super(props);
     this.state = {
       playing: false
     }
+    this.audioContext = null;
+    this.audioRef = createRef();
+    this.filters = null;
   }
 
-  handlePlay = () => {
+  // setWave() {
+  //   const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+  //   if (AudioContext) {
+  //     this.audioContext = new AudioContext();
+  //     const audioElement = this.audioRef.current;
+  //     if (audioElement && this.audioContext) {
+  //       const source = this.audioContext.createMediaElementSource(audioElement);
+  //       source.connect(this.audioContext.destination);
+  //     }
+  //   } else {
+  //     console.error("Web Audio API is not supported in this browser");
+  //   }
+  // }
+
+  // cleanupAudio() {
+  //   if (this.audioContext) {
+  //     this.audioContext.close();
+  //   }
+  // }
+
+  setupAudio() {
+    this.audioContext = new AudioContext()
+    this.filters = this.eqBands.map((band) => {
+      const filter = this.audioContext!.createBiquadFilter()
+      filter.type = band <= 32 ? 'lowshelf' : band >= 16000 ? 'highshelf' : 'peaking'
+      filter.gain.value = Math.random() * 40 - 20
+      filter.Q.value = 1 // resonance
+      filter.frequency.value = band // the cut-off frequency
+      return filter
+    });
+  }
+
+  handleAudio() {
+    this.audio.controls = true
+    this.audio.src = `data:audio/wav;base64, ${this.props.audioData}`;
+    this.audio.addEventListener(
+      'canplay',
+      () => {
+        // Create a MediaElementSourceNode from the audio element
+        if (this.filters && this.audioContext) {
+          const mediaNode = this.audioContext.createMediaElementSource(this.audio)
+          
+          // Connect the filters and media node sequentially
+          const equalizer = this.filters.reduce((prev, curr) => {
+            prev.connect(curr)
+            return curr
+          }, mediaNode)
+          
+          // Connect the filters to the audio output
+          equalizer.connect(this.audioContext.destination)
+        }
+        },
+        { once: true },
+    )
+  }
+
+  createSlider() {
+    const container = document.createElement('p');
+    if (this.filters) {
+      this.filters.forEach((filter) => {
+        const slider = document.createElement('input')
+        slider.type = 'range'
+        // slider.orient = 'vertical'
+        slider.style.appearance = 'slider-vertical'
+        slider.style.width = '8%'
+        slider.min = "-40"
+        slider.max = "40"
+        slider.value = filter.gain.value.toString()
+        slider.step = "0.1"
+        // slider.oninput = (e) => (filter.gain.value = e.target.value)
+        container.appendChild(slider)
+        document.body.appendChild(container);
+      });
+    }
+  }
+  handlePlay() {
     this.setState({ playing: !this.state.playing });
     this.wavesurfer?.playPause();
   }
 
   componentDidMount() {
-    // Initialize WaveSurfer
     this.wavesurfer = WaveSurfer.create(options);
-
-    // Load audio file
-    this.wavesurfer.load("https://api.twilio.com//2010-04-01/Accounts/AC25aa00521bfac6d667f13fec086072df/Recordings/RE6d44bc34911342ce03d6ad290b66580c.mp3");
+    this.createSlider();
+    // this.handleAudio();
+    // this.setWave();
   }
 
   componentWillUnmount() {
-    // Clean up when the component is unmounted
     if (this.wavesurfer) {
       this.wavesurfer.destroy();
     }
+    // this.cleanupAudio();
   }
 
   render() {
     return (
       <div>
-        <PlayButton onClick={this.handlePlay}>
-          {!this.state.playing ? "Play" : "Pause"}
-        </PlayButton>
-        <div ref={this.waveformRef}></div>
+        {/* <audio ref={this.audioRef} controls>
+          <source src={`data:audio/mp3;base64, ${this.props.audioData}`} type="audio/mp3"/>
+        </audio> */}
       </div>
     );
   }
 }
+
+export default DisplayWave;

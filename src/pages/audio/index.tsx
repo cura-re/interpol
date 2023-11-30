@@ -1,6 +1,7 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Card } from "react-bootstrap";
 import DisplayWave from '../../components/wavesurfer/wavesurfer.component';
+import { WaveformContianer } from '../../styles/waveform/waveform.styles';
 
 export interface IAudio {
     audioId: string;
@@ -17,7 +18,9 @@ function Audio({
             {   
                 data?.map(({ audioId, fileName, audioData }: IAudio, index: number) => {
                     return (
-                        <DisplayWave audioId={audioId} fileName={fileName} audioData={audioData}/>
+                        // <WaveformContianer>
+                            <DisplayWave key={index} audioId={audioId} fileName={fileName} audioData={audioData}/>
+                        // </WaveformContianer>
                     )
             })}
         </>

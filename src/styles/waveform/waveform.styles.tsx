@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const WaveformContianer = styled.div`
   display: flex;
+  position: relative;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -9,6 +10,11 @@ export const WaveformContianer = styled.div`
   width: 100%;
   background: transparent;
   gap: 2rem;
+  .wavesurfer {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 `;
 
 export const Wave = styled.div`

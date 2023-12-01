@@ -29,7 +29,7 @@ function Posts({
           return (
             <Card style={{ margin: '1rem' }} key={postId}>
               <a href={`/posts/${postId}`}>
-                <Card.Img style={{ borderRadius: '.5rem'}} src={imageData ? `data:image/png;base64, ${imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
+                <Card.Img style={{ borderRadius: '.5rem'}} src={imageData != null ? `data:image/png;base64, ${imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
               </a>
               <Card.ImgOverlay>
                 <Card.Title>{postContent}</Card.Title>

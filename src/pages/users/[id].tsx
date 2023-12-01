@@ -15,7 +15,7 @@ function Page({
     return (
         <Card style={{ margin: '1rem' }} key={data?.userId}>
             <a href={`/profile/${data?.userId}`}>
-            <Card.Img style={{ borderRadius: '.5rem'}} src={data?.imageData ? `data:image/png;base64, ${data?.imageData}` : "https:yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
+            <Card.Img style={{ borderRadius: '.5rem'}} src={data?.imageData != null ? `data:image/png;base64, ${data?.imageData}` : "https:yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
             </a>
             <Card.ImgOverlay>
             <Card.Title>{data?.userName}</Card.Title>

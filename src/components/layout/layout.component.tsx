@@ -2,6 +2,7 @@ import { Component, Dispatch, ReactNode } from "react";
 import { Container } from 'reactstrap';
 import { ConnectedProps, connect } from "react-redux";
 import { RootState } from "../../store/store";
+import NavMenu from "../navmenu/navmenu.component";
 
 type SidebarMenuProps = ConnectedProps<typeof connector>;
 
@@ -15,11 +16,10 @@ export class Layout extends Component<Props> {
   render() {
     return (
       <>
-        {
+          <NavMenu/>
           <Container tag="main">
             {this.props.children}
           </Container>
-        }
       </>
     );
   }

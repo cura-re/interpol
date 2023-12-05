@@ -116,7 +116,11 @@ export const SearchContainer = styled.div`
   } 
 `;
 
-export const ListContainer = styled.div`
+export const ListContainer = styled.a`
+  text-decoration: none;
+  color: white;
+  justify-content: center;
+  padding-top: .8rem;
   margin-right: 1rem;
   margin-left: .5rem;
   border: 1px solid transparent;

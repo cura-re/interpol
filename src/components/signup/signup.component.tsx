@@ -5,7 +5,7 @@ import { Form, Row, Button } from 'react-bootstrap';
 
 import { SignUpStart, signUpStart } from '../../store/user/user.action';
 import { RootState } from '../../store/store';
-import { SignUpContainer } from '../../styles/signup/signup.styles';
+import { ButtonsContainer, SignUpContainer } from '../../styles/authentication/authentication.styles';
 
 interface IDefaultFormFields {
   username: string;
@@ -127,7 +127,9 @@ class SignUpForm extends Component<SignUpProp, IDefaultFormFields> {
                 <Form.Control className="form-control" onChange={this.showPreview} name="medialink" as="input" accept="image/*" type="file" placeholder="Media" />
             </Form.Group>
             <div className="col-12 mb-3" style={{ justifyContent: 'center' }}>
+              <ButtonsContainer>
                 <button className="col-12 mb-3 btn btn-outline-light" type="submit" >Join</button>
+              </ButtonsContainer>
             </div>
           </Row>
         </Form>

@@ -22,8 +22,8 @@ export type MarauderSetIdFailed = ActionWithPayload<
     Error
 >;
    
-export type MarauderFetchSingleStart = Action<
-    MARAUDER_ACTION_TYPES.FETCH_SINGLE_START
+export type MarauderFetchSingleStart = ActionWithPayload<
+    MARAUDER_ACTION_TYPES.FETCH_SINGLE_START, { id: string }
 >;
 
 export type MarauderFetchSingleSuccess = ActionWithPayload<
@@ -66,8 +66,8 @@ export const marauderSetIdFailed = withMatcher(
 );
 
 export const marauderFetchSingleStart = withMatcher(
-    (): MarauderFetchSingleStart => 
-    createAction(MARAUDER_ACTION_TYPES.FETCH_SINGLE_START)
+    (id: string): MarauderFetchSingleStart => 
+    createAction(MARAUDER_ACTION_TYPES.FETCH_SINGLE_START, { id })
 );
 
 export const marauderFetchSingleSuccess = withMatcher(

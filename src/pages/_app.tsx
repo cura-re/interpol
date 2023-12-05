@@ -44,4 +44,4 @@ function App({ Component, ...rest }: AppProps) {
   );
 }
 
-export default App;
+export default wrapper.withRedux(App);

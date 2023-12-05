@@ -2,7 +2,7 @@ import { Dispatch, FormEvent, ChangeEvent, Component } from 'react';
 import { ConnectedProps, connect } from "react-redux";
 import { Form, Row, Button } from 'react-bootstrap';
 
-import { SignInContainer } from '../../styles/signin/signin.styles';
+import { ButtonsContainer, SignInContainer } from '../../styles/authentication/authentication.styles';
 import { EmailSignInStart, SignUpStart, emailSignInStart, signUpStart } from '../../store/user/user.action';
 import { RootState } from '../../store/store';
 
@@ -74,7 +74,9 @@ class SignInForm extends Component<SignInProp, IDefaultFormFields> {
               />
           </Form.Group>
           <div className="col-12 mb-3" style={{ justifyContent: 'center' }}>
-            <button className="col-12 mb-3 btn btn-outline-light" type="submit">Sign In</button>
+            <ButtonsContainer>
+              <button className="col-12 mb-3 btn btn-outline-light" type="submit">Sign In</button>
+            </ButtonsContainer>
           </div>
           </Row>
         </Form>

@@ -26,11 +26,11 @@ export function* fetchMarauders() {
 }
 
 export function* fetchSingleMarauderAsync({ 
-    payload: { userId } }: MarauderFetchSingleStart) {
+    payload: { id } }: MarauderFetchSingleStart) {
     try {
         const marauderSnapshot = yield* call(
             getSingleMarauder,
-            userId 
+            id 
         );
         yield* put(marauderFetchSingleSuccess(marauderSnapshot as Marauder));
     } catch (error) {

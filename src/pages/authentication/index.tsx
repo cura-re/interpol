@@ -1,8 +1,6 @@
 import { Component } from "react";
 import { Col, Row } from "react-bootstrap";
-
-import { AuthenticationContainer } from "../../styles/authentication/authentication.styles";
-import { SignInContainer } from "../../styles/signin/signin.styles";
+import { AuthenticationContainer, ButtonsContainer, SignInContainer } from "../../styles/authentication/authentication.styles";
 import SignInForm from "../../components/signin/signin.component";
 import SignUpForm from "../../components/signup/signup.component";
 
@@ -38,11 +36,13 @@ class Authentication extends Component<{}, IToggle> {
             <AuthenticationContainer>
                 <Row xs={1}>
                     <Col xs={12}>
-                        {signIn ? <SignInForm/>
+                        {this.signIn ? <SignInForm/>
                         : <SignUpForm/>}
                         <div className="d-grid mt-3">
                             <SignInContainer>
-                                <button className="btn btn-outline-light btn-lg" type="button" onClick={this.toggleSignIn}>{name}</button>
+                                <ButtonsContainer>
+                                    <button className="btn btn-outline-light btn-lg" type="button" onClick={this.toggleSignIn}>{this.name}</button>
+                                </ButtonsContainer>
                             </SignInContainer>
                         </div>
                     </Col>

@@ -1,8 +1,6 @@
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import axios from "axios";
 import { Marauder } from "../../store/marauder/marauder.types";
 import { User } from "../../store/user/user.types";
-import { IUser } from '../../components/users/[id].component';
 
 const api = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/users`;
 
@@ -25,42 +23,18 @@ export async function getSingleUser(userId: string | undefined): Promise<User> {
   return result;
 }
 
-export const getServerSideProps = (async ({ query }) => {
-  const { id } = query
-  console.log("ID::: ", id)
-  const res = await fetch(
-      `http://localhost:5274/users/${id}`,
-      {
-          method: "GET",
-          headers: {
-              'Accept': 'application/x-www-form-urlencoded',
-              'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          next: { revalidate: 10 }
-      }
+export async function getSingleMarauder(id: string): Promise<Marauder> {
+  const response = await fetch(
+    `${api}/id/${id}`,
+    {
+      method: "GET",
+      headers: headers,
+      next: { revalidate: 10 }
+    }
   )
-  const data = await res.json();
+  const data = await response.json();
 
-  if (!data) {
-      return {
-        notFound: true,
-      }
-  }
-
-  return { props: { data }};
-}) satisfies GetServerSideProps<{
-  data: Array<IUser>
-}>;
-
-export async function getSingleMarauder(userId: string): Promise<Marauder> {
-  const response = await axios({
-    method: 'get',
-    url:`${api}/${userId}`,
-    headers: headers,
-    withCredentials: true
-  });
-  const result = await response.data;
-  return result;
+  return data;
 }
 
 export async function getUsers(): Promise<User[]> {

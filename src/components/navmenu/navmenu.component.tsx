@@ -48,12 +48,10 @@ class NavMenu extends Component<NavMenuProps, INavMenu> {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <NavContainer>
+                        <ListContainer>
                             <List type='button' size={25} onClick={this.handleOpen} style={{ padding: '.02rem', cursor: 'pointer' }} className="d-flex align-items-center"/>
-                        </NavContainer>
-                        <NavContainer>
-                            <Navbar.Brand className='brand' href="/"><Image style={{ width: '1.5rem', height: '1.5rem', borderRadius: '.2rem', marginRight: '.5rem' }} src='/favicon.ico'/>Interpol</Navbar.Brand>
-                        </NavContainer>
+                        </ListContainer>
+                        <Navbar.Brand style={{ textDecoration: 'none', color: 'white', marginRight: '1rem' }} className='brand' href="/"><Image style={{ width: '1.5rem', height: '1.5rem', borderRadius: '.2rem', marginRight: '.5rem' }} src='/favicon.ico'/>Interpol</Navbar.Brand>
                         <NavContainer href="/dash">Dashboard</NavContainer>
                         <NavContainer href="/capcom">CapCom</NavContainer>
                     </Nav>

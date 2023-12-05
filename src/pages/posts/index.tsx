@@ -1,5 +1,5 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { Card } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Post } from "../../store/post/post.types";
 import { User } from "../../store/user/user.types";
@@ -34,10 +34,17 @@ function Posts({
               <Card.ImgOverlay>
                 <Card.Title>{postContent}</Card.Title>
                 <Card.Body>
-                  <Card.Text>{imageLink}</Card.Text>
+                <Row style={{ position: 'relative' }} xs={2}>
+                  <Col xs={3}>
+                  <Card.Img style={{ width: '2rem', height: '2rem', objectFit: 'cover' }} src={imageData != null ? `data:image/png;base64, ${user.imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
+                  </Col>
+                  <Col>
+                    {/* <AContainer href={`/profile/${user.userId}`} style={{ marginBottom: '.5rem', marginLeft: '-1rem' }}>{user.username}</AContainer> */}
                   <a href={`/users/${user.userId}`}>
-                  <Card.Text>{user.userName}</Card.Text>
+                    <Card.Text>{user.userName}</Card.Text>
                   </a>
+                  </Col>
+                </Row>
                 </Card.Body>
               </Card.ImgOverlay>
             </Card>

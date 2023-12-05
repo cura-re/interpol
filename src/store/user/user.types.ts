@@ -31,6 +31,7 @@ export type User = {
     about: string | null;
     imageLink: string | null;
     imageSource: string | null;
+    imageData: Int32Array | null;
     dateCreated: Date | null;
     posts: Post[];
     devices: Device[];

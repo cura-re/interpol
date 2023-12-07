@@ -9,6 +9,7 @@ import { Card, Col, Row, Tab, Tabs } from "react-bootstrap";
 import { UserProfileCard } from "../../components/profilecard/userprofilecard.component";
 import { ProfileContainer } from "../../styles/profile/profile.styles";
 import { IUser } from "../users";
+import PostsTab from "../../components/poststab/poststab.component";
 
 interface Context extends NextPageContext {
     props: {
@@ -20,6 +21,7 @@ interface Context extends NextPageContext {
 const SingleProfile: NextPage<Context> = props => {
     const dispatch = useDispatch();
     const user = useSelector(selectSingleMarauder);
+    console.log(user)
     useEffect(() => {
         dispatch(marauderFetchSingleStart(props.props.id));
     }, [dispatch]);
@@ -37,18 +39,18 @@ const SingleProfile: NextPage<Context> = props => {
                     className='mb-5 tabscolor'
                     variant='pills'
                 >
-                    {/* <Tab eventKey="posts" title="Posts">
-                        <UserPostsTab marauderId={id} { ...props } />
-                    </Tab> */}
-                    {/* <Tab eventKey="chats" title="Chats">
-                        <UserChatsTab marauderId={id} { ...props } />
+                    <Tab eventKey="posts" title="Posts">
+                        <PostsTab posts={user?.posts} { ...props } />
                     </Tab>
+                    <Tab eventKey="chats" title="Chats">
+                        {/* <UserChatsTab marauderId={id} { ...props } /> */}
+                    </Tab> 
                     <Tab eventKey="communities" title="Communities">
-                        <UserCommunitiesTab marauderId={id} { ...props } />
+                        {/* <UserCommunitiesTab marauderId={id} { ...props } /> */}
                     </Tab>
                     <Tab eventKey="gltfs" title="Gltfs">
-                        <UserGltfsTab marauderId={id} { ...props } />
-                    </Tab> */}
+                        {/* <UserGltfsTab marauderId={id} { ...props } /> */}
+                    </Tab>
                 </Tabs>
                 </Col>
             </Row>

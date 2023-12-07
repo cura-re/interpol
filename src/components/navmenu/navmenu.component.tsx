@@ -45,15 +45,15 @@ class NavMenu extends Component<NavMenuProps, INavMenu> {
                     <Container fluid>
                     <Nav
                         className="me-auto nav-hidden"
-                        style={{ maxHeight: '100px' }}
+                        style={{ maxHeight: '100px', lineHeight: '2%' }}
                         navbarScroll
                     >
-                        <ListContainer>
+                        <ListContainer style={{ verticalAlign: 'text-top' }}>
                             <List type='button' size={25} onClick={this.handleOpen} style={{ padding: '.02rem', cursor: 'pointer' }} className="d-flex align-items-center"/>
                         </ListContainer>
-                        <Navbar.Brand style={{ textDecoration: 'none', color: 'white', marginRight: '1rem' }} className='brand' href="/"><Image style={{ width: '1.5rem', height: '1.5rem', borderRadius: '.2rem', marginRight: '.5rem' }} src='/favicon.ico'/>Interpol</Navbar.Brand>
-                        <NavContainer href="/dash">Dashboard</NavContainer>
-                        <NavContainer href="/capcom">CapCom</NavContainer>
+                        <Navbar.Brand style={{ textDecoration: 'none', color: 'white', marginRight: '1rem', verticalAlign: 'middle' }} className='brand' href="/">Interpol</Navbar.Brand>
+                        <NavContainer style={{ verticalAlign: 'middle' }} href="/dash">Dashboard</NavContainer>
+                        <NavContainer style={{ verticalAlign: 'middle' }} href="/capcom">CapCom</NavContainer>
                     </Nav>
                     <SearchContainer>
                     <Searchbar/>

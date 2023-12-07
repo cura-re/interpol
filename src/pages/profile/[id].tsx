@@ -8,14 +8,7 @@ import { selectSingleMarauder } from "../../store/marauder/marauder.selector";
 import { Card, Col, Row, Tab, Tabs } from "react-bootstrap";
 import { UserProfileCard } from "../../components/profilecard/userprofilecard.component";
 import { ProfileContainer } from "../../styles/profile/profile.styles";
-
-interface IUser {
-    userId: string;
-    userName: string;
-    firstName: string;
-    about: string;
-    imageData: Int32Array;
-}
+import { IUser } from "../users";
 
 interface Context extends NextPageContext {
     props: {
@@ -35,7 +28,7 @@ const SingleProfile: NextPage<Context> = props => {
         <ProfileContainer>
             <Row lg={2}>
                 <Col style={{ marginBottom: '2rem' }}lg={4}>
-                <UserProfileCard about={user?.about!} imageData={user?.imageData!} userName={user?.userName!} userId={user?.userId!} />
+                    <UserProfileCard about={user?.about!} imageData={user?.imageData!} userName={user?.userName!} userId={user?.userId!} />
                 </Col>
                 <Col lg={8}>                
                 <Tabs

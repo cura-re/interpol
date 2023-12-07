@@ -1,34 +1,30 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { Card } from "react-bootstrap";
-import { User } from "../../store/user/user.types";
-
-interface IPost {
-    postId: number;
-    postContent: string | null;
-    imageData: Int32Array | null;
-    imageLink: string;
-    type: string;
-    dateCreated: Date;
-    user: User,
-    comments: Comment[];
-}
+import { AContainer, BodyContainer, CardContainer, CardImageContainer, ImageContainer } from "../../styles/post/post.styles";
+import { IPost } from ".";
 
 function Posts({
   data
 }: InferGetServerSidePropsType<typeof getServerSideProps>) { 
     return (
-        <Card style={{ margin: '1rem' }} key={data?.postId}>
-            <Card.Img style={{borderRadius: '.5rem'}} src={data?.imageData != null ? `data:image/png;base64, ${data?.imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
-            <Card.ImgOverlay>
-                <Card.Title>{data?.postContent}</Card.Title>
-                <Card.Body>
-                <Card.Text>{data?.imageLink}</Card.Text>
-                <a href={`/profile/${data?.user.userId}`}>
-                <Card.Text>{data?.user.userName}</Card.Text>
-                </a>
-                </Card.Body>
-            </Card.ImgOverlay>
-        </Card>
+        <CardContainer style={{ margin: 'auto', width: '50%' }} key={data?.index}>
+            <Card key={data?.postId}>
+              <Card.Body>
+                <BodyContainer>
+                  <ImageContainer key="imageContainer">
+                    <Card.Img style={{ borderRadius: '1rem', verticalAlign: 'middle' }} src={data?.imageData != null ? `data:image/png;base64, ${data?.user.imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
+                  </ImageContainer>
+                  <AContainer key="aContainer" href={`/profile/${data?.user.userId}`}>
+                    {data?.user.userName}
+                  </AContainer>
+                </BodyContainer>
+              </Card.Body>
+              <CardImageContainer key="cardImageContainer" href={`/posts/${data?.postId}`}>
+                <Card.Img style={{ borderRadius: '.5rem', objectFit: 'cover' }} src={data?.imageData != null ? `data:image/png;base64, ${data?.imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
+              </CardImageContainer>
+              <Card.Title key="postContent">{data?.postContent}</Card.Title>
+            </Card>
+        </CardContainer>
     );
 }
 

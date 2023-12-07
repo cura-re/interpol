@@ -1,15 +1,15 @@
-import { ConnectedProps, useDispatch, useSelector } from "react-redux";
-import { marauderFetchSingleStart } from "../../store/marauder/marauder.action";
-import { wrapper } from "../../store/store";
 import { NextPage } from "next";
 import { NextPageContext } from "next/types";
 import { useEffect } from "react";
-import { selectSingleMarauder } from "../../store/marauder/marauder.selector";
-import { Card, Col, Row, Tab, Tabs } from "react-bootstrap";
+import { Col, Row, Tab, Tabs } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import PostsTab from "../../components/poststab/poststab.component";
 import { UserProfileCard } from "../../components/profilecard/userprofilecard.component";
+import { marauderFetchSingleStart } from "../../store/marauder/marauder.action";
+import { selectSingleMarauder } from "../../store/marauder/marauder.selector";
+import { wrapper } from "../../store/store";
 import { ProfileContainer } from "../../styles/profile/profile.styles";
 import { IUser } from "../users";
-import PostsTab from "../../components/poststab/poststab.component";
 
 interface Context extends NextPageContext {
     props: {
@@ -21,7 +21,7 @@ interface Context extends NextPageContext {
 const SingleProfile: NextPage<Context> = props => {
     const dispatch = useDispatch();
     const user = useSelector(selectSingleMarauder);
-    console.log(user)
+
     useEffect(() => {
         dispatch(marauderFetchSingleStart(props.props.id));
     }, [dispatch]);

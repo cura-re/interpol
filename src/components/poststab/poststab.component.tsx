@@ -6,7 +6,6 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Comment } from "../../store/comment/comment.types";
 import { Post } from "../../store/post/post.types";
 import { AContainer, BadgeContainer, CardContainer, CommentContainer, ModalContainer, PostContainer, TextContainer } from "../../styles/post/post.styles";
-// import { AContainer, BadgeContainer, CardContainer, CommentContainer, ModalContainer, PostContainer, TextContainer } from "../../styles/poststab/poststab.styles";
 
 interface IDefaultFormFields {
     commentValue: string;
@@ -112,12 +111,12 @@ export class PostsTab extends Component<any, IDefaultFormFields> {
         //     this.props.getUserPosts(this.props.marauderId);
         // }
 
-        if (this.props.posts.singlePost?.postId != prevProps.posts.singlePost?.postId) {
-            this.props.getUserPosts(this.props.marauder.singleMarauder?.userId!);
-            this.setState({
-                commentValue: ""
-            })
-        }
+        // if (this.props.posts.singlePost?.postId != prevProps.posts.singlePost?.postId) {
+        //     this.props.getUserPosts(this.props.marauder.singleMarauder?.userId!);
+        //     this.setState({
+        //         commentValue: ""
+        //     })
+        // }
 
         // if (this.props.comments.comments?.length != prevProps.comments.comments?.length) {
         //     this.props.getComments(this.props.posts.singlePost?.postId!);

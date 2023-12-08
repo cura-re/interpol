@@ -1,4 +1,4 @@
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { NextUIProvider, useSSR } from '@nextui-org/react';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';

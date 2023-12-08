@@ -2,7 +2,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { Card } from "react-bootstrap";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Marauder } from "../../store/marauder/marauder.types";
-import { AProfileContainer, UserCardContainer } from "../../styles/user/user.styles";
+import { AProfileContainer, ProfileRouteContainer, UserCardContainer } from "../../styles/user/user.styles";
 
 export interface IUser {
   userId: string;
@@ -24,15 +24,15 @@ function Interpoler({
         data?.map(({ userId, userName, firstName, about, imageData }: Marauder, index: number) => {
           return (
             <UserCardContainer>
-              <Card key={userId}>
+              <ProfileRouteContainer href={`/profile/${userId}`}>{userName}</ProfileRouteContainer>
+              <Card key={userId} className="bg-dark my-3">
                 <AProfileContainer href={`/profile/${userId}`}>
                   <Card.Img style={{ borderRadius: '.5rem'}} src={imageData != null ? `data:image/png;base64, ${imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
                 </AProfileContainer>
-                <Card.Title>{userName}</Card.Title>
-                <Card.Body>
-                  <Card.Text>{about}</Card.Text>
-                </Card.Body>
               </Card>
+              <Card.Body>
+                <Card.Text>{about}</Card.Text>
+              </Card.Body>
             </UserCardContainer>
           );
         })

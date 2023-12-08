@@ -16,3 +16,9 @@ export const AProfileCardContainer = styled.a`
         color: gray;
     }
 `;
+
+export const MainContainer = styled.div`
+    color: white;
+    background: black;
+    border: .1rem solid white;
+`;

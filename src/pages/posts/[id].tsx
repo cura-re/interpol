@@ -29,28 +29,28 @@ function Posts({
 }
 
 export const getServerSideProps = (async (context) => {
-    const { id } = context.query;
-    const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/posts/details/${id}`,
-        {
-            method: "GET",
-            headers: {
-                'Accept': 'application/x-www-form-urlencoded',
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            next: { revalidate: 10 }
-        }
-    );
-    const data = await res.json();
-    if (!data) {
-        return {
-            notFound: true,
-        }
+  const { id } = context.query;
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/posts/details/${id}`,
+    {
+      method: "GET",
+      headers: {
+        'Accept': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      next: { revalidate: 10 }
     }
+  );
+  const data = await res.json();
+  if (!data) {
+    return {
+      notFound: true,
+    }
+  }
 
-    return { props: { data }};
+  return { props: { data }};
 }) satisfies GetServerSideProps<{
-    data: Array<IPost>
+  data: Array<IPost>
 }>;
 
 export default Posts;

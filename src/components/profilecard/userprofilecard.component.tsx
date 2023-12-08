@@ -1,10 +1,7 @@
 import { Component } from "react";
 import { Card, Col, Image, Row } from "react-bootstrap";
 import { Community } from "../../store/community/community.types";
-import { AProfileCardContainer } from "../../styles/profile/profile.styles";
-// import { SingleProfileProps } from "../../pages/profile/[id]";
-// import { Community } from "../../store/community/community.types";
-// import { AContainer } from "../../styles/poststab/poststab.styles";
+import { AProfileCardContainer, MainContainer } from "../../styles/profile/profile.styles";
 
 interface IInterpolUser {
     userId?: string;
@@ -28,15 +25,17 @@ export class UserProfileCard extends Component<IInterpolUser> {
     }
 
     render() {
-        const { about, imageData, userName, userId, communities } = this.props;
+        const { about, imageData, userName, firstName, userId, communities } = this.props;
         return (
-            <Card style={{ color: 'white', background: 'black', border: '.1rem solid white' }} key={"userId"}>
+            <MainContainer>
+            <Card className="bg-dark" key={"userId"}>
                 <Card.Img style={{ borderRadius: '.5rem'}} src={imageData != null ? `data:image/png;base64, ${imageData}` : "https:yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
                 <Card.Body>
                     <Row xs={2}>
                         <Col xs={9}>
                             <Card.Link style={{ textDecoration: 'none', color: 'white' }} href={`/profile/${userId}`}>
                                 <Card.Title>{userName}</Card.Title>
+                                <Card.Text>{firstName}</Card.Text>
                                 <hr></hr>
                                 <Card.Text>{about}</Card.Text>
                                 {communities?.length != null && <hr></hr>}
@@ -63,6 +62,7 @@ export class UserProfileCard extends Component<IInterpolUser> {
                     </Row>
                 </Card.Body>
             </Card>
+            </MainContainer>
         );
     }
 }

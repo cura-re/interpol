@@ -6,3 +6,7 @@ export const UserCardContainer = styled.div`
     margin: 1rem;
     color: white;
 `;
+
+export const ProfileRouteContainer = styled.a`
+    color: white;
+`;  

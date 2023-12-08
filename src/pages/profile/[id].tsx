@@ -29,7 +29,7 @@ const SingleProfile: NextPage<Context> = props => {
     return(
         <ProfileContainer>
             <Row lg={2}>
-                <Col style={{ marginBottom: '2rem' }}lg={4}>
+                <Col style={{ marginBottom: '2rem' }} lg={4}>
                     <UserProfileCard about={user?.about!} imageData={user?.imageData!} userName={user?.userName!} userId={user?.userId!} />
                 </Col>
                 <Col lg={8}>                

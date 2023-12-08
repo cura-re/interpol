@@ -1,15 +1,13 @@
 import styled from "styled-components";
 
 export const AContainer = styled.a`
-    text-decoration: none;
-    color: white;
-    vertical-align: middle;
-    margin-bottom: .5rem;
-    width: 10px;
-    &:hover {
-        cursor: pointer;
-        color: gray;
-    }
+  text-decoration: none;
+  color: white;
+  margin-bottom: .5rem;
+  &:hover {
+    cursor: pointer;
+    color: gray;
+  }
 `;
 
 export const BadgeContainer = styled.div`
@@ -44,7 +42,6 @@ export const CommentContainer = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-    vertical-align: middle; 
     width: 2rem;
     height: 2rem;
     object-fit: cover;

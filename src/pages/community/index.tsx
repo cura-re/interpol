@@ -3,19 +3,19 @@ import { Card } from "react-bootstrap";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { User } from "../../store/user/user.types";
 import { AContainer, BodyContainer, CardContainer, CardImageContainer, ImageContainer, TextContainer } from "../../styles/post/post.styles";
+import { wrapper } from "../../store/store";
 
-export interface IPost {
-  postId: number;
-  postContent: string | null;
+export interface ICommunity {
+  communityId: number;
+  communityName: string | null;
+  communityDescription: string | null;
   imageData: Int32Array | null;
   imageLink: string;
-  type: string;
   dateCreated: Date;
   user: User;
-  comments: Comment[];
 }
 
-function Posts({
+function Communities({
   data
 }: InferGetServerSidePropsType<typeof getServerSideProps>) { 
   return (
@@ -24,7 +24,7 @@ function Posts({
     >
       <Masonry>
       {
-        data?.map(({ postId, postContent, imageData, user }: IPost, index: number) => {
+        data?.map(({ communityId, communityName, communityDescription, imageData, user }: ICommunity, index: number) => {
           return (
             <CardContainer key={index}>
             <Card.Body>
@@ -37,12 +37,13 @@ function Posts({
                 </AContainer>
               </BodyContainer>
             </Card.Body>
-            <Card className="bg-dark" key={postId}>
-              <CardImageContainer key="cardImageContainer" href={`/posts/${postId}`}>
+            <Card className="bg-dark" key={communityId}>
+              <CardImageContainer key="cardImageContainer" href={`/community/${communityId}`}>
                 <Card.Img style={{ borderRadius: '.5rem'}} src={imageData != null ? `data:image/png;base64, ${imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
               </CardImageContainer>
             </Card>
-            <TextContainer key="postContent">{postContent}</TextContainer>
+            <TextContainer key="communityName">{communityName}</TextContainer>
+            <TextContainer key="communitDescription">{communityDescription}</TextContainer>
             </CardContainer>
           );
         })
@@ -53,30 +54,43 @@ function Posts({
 }
 
 export const getServerSideProps = (async (context) => {
-  const { id } = context.query;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/posts`,
-    {
-      method: "GET",
-      headers: {
-        'Accept': 'application/x-www-form-urlencoded',
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      next: { revalidate: 10 }
+    const { id } = context.query;
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/communities`,
+        {
+            method: "GET",
+            headers: {
+                'Accept': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            next: { revalidate: 10 }
+        }
+    );
+
+    const data = await res.json();
+
+    if (!data) {
+        return {
+            notFound: true,
+        }
     }
-  );
 
-  const data = await res.json();
-
-  if (!data) {
-    return {
-      notFound: true,
-    }
-  }
-
-  return { props: { data }};
+    return { props: { data }};
 }) satisfies GetServerSideProps<{
-  data: Array<IPost>
+    data: Array<ICommunity>
 }>;
 
-export default Posts;
+// Communities.getInitialProps = wrapper.getInitialPageProps(store => async (context) => {
+//     await store.dispatch(marauderFetchSingleStart());
+//     // const communities = 
+  
+//     // if (!store.getState().placeholderData) {
+//     //   store.dispatch(loadData())
+//     //   store.dispatch(END)
+//     // }
+  
+//     // await store.sagaTask.toPromise()
+//     return { props: { id } };
+// });
+
+export default wrapper.withRedux(Communities);

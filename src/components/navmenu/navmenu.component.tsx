@@ -41,19 +41,19 @@ class NavMenu extends Component<NavMenuProps, INavMenu> {
     render() {
         return (
             <NavmenuContainer className="fixed-top">
-                <Navbar style={{ border: "1px solid white", borderRadius: "5px", position: 'relative', padding: '1rem' }} variant="dark" bg="dark" sticky="top" expand="lg" >
+                <Navbar style={{ border: "1px solid white", borderRadius: "5px", position: 'relative' }} variant="dark" bg="dark" sticky="top" expand="lg" >
                     <Container fluid>
+                    <ListContainer>
+                        <List type='button' size={25} onClick={this.handleOpen} style={{ padding: '.02rem', cursor: 'pointer' }} className="d-flex align-items-center"/>
+                    </ListContainer>
+                    <Navbar.Brand style={{ textDecoration: 'none', color: 'white', marginRight: '1rem' }} className='brand' href="/">Interpol</Navbar.Brand>
                     <Nav
                         className="me-auto nav-hidden"
-                        style={{ maxHeight: '100px', lineHeight: '2%' }}
+                        style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <ListContainer style={{ verticalAlign: 'text-top' }}>
-                            <List type='button' size={25} onClick={this.handleOpen} style={{ padding: '.02rem', cursor: 'pointer' }} className="d-flex align-items-center"/>
-                        </ListContainer>
-                        <Navbar.Brand style={{ textDecoration: 'none', color: 'white', marginRight: '1rem', verticalAlign: 'middle' }} className='brand' href="/">Interpol</Navbar.Brand>
-                        <NavContainer style={{ verticalAlign: 'middle' }} href="/dash">Dashboard</NavContainer>
-                        <NavContainer style={{ verticalAlign: 'middle' }} href="/capcom">CapCom</NavContainer>
+                        <NavContainer href="/dash">Dashboard</NavContainer>
+                        <NavContainer href="/capcom">CapCom</NavContainer>
                     </Nav>
                     <SearchContainer>
                     <Searchbar/>

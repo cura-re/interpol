@@ -17,7 +17,7 @@ export class Layout extends Component<Props> {
     return (
       <>
           <NavMenu/>
-          <Container tag="main">
+          <Container style={{ marginTop: '3rem' }} tag="main">
             {this.props.children}
           </Container>
       </>

@@ -18,6 +18,7 @@ export interface IPost {
 function Posts({
   data
 }: InferGetServerSidePropsType<typeof getServerSideProps>) { 
+  console.log(data);
   return (
     <ResponsiveMasonry
       columnsCountBreakPoints={{350: 2, 750: 3, 900: 3, 1050: 4}}

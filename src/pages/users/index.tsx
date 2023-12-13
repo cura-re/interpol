@@ -19,11 +19,11 @@ function Interpoler({
     <ResponsiveMasonry
       columnsCountBreakPoints={{350: 2, 750: 3, 900: 3, 1050: 4}}
     >
-      <Masonry>
+      <Masonry >
       {
         data?.map(({ userId, userName, firstName, about, imageData }: Marauder, index: number) => {
           return (
-            <UserCardContainer>
+            <UserCardContainer style={{ marginTop: '2rem' }}>
               <ProfileRouteContainer href={`/profile/${userId}`}>{userName}</ProfileRouteContainer>
               <Card key={userId} className="bg-dark my-3">
                 <AProfileContainer href={`/profile/${userId}`}>

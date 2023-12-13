@@ -15,6 +15,12 @@ export const AProfileCardContainer = styled.a`
         cursor: pointer;
         color: gray;
     }
+    .community-image {
+        width: 2rem;
+        height: 2rem;
+        object-fit: cover;
+        border-radius: 2rem;
+    }
 `;
 
 export const MainContainer = styled.div`

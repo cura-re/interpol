@@ -1,29 +1,45 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
 import { Card } from "react-bootstrap";
 import { AContainer, BodyContainer, CardContainer, CardImageContainer, ImageContainer, TextContainer } from "../../styles/post/post.styles";
 import { ICommunity } from ".";
+import { wrapper } from "../../store/store";
+import { communityFetchSingleStart } from "../../store/community/community.action";
+import { useDispatch, useSelector } from "react-redux";
+import { selectSingleCommunity } from "../../store/community/community.selector";
+import { NextPageContext } from "next/types";
+import { useEffect } from "react";
 
-function Community({
-  data
-}: InferGetServerSidePropsType<typeof getServerSideProps>) { 
+interface Context extends NextPageContext {
+  props: {
+    id: string;
+  }
+}
+
+const Community: NextPage<Context> = props => {
+  const dispatch = useDispatch();
+  const community = useSelector(selectSingleCommunity);
+
+  useEffect(() => {
+    dispatch(communityFetchSingleStart(props.props.id));
+}, [dispatch]);
   return (
-    <CardContainer key={data?.index}>
+    <CardContainer key={community?.communityId}>
       <Card.Body>
         <BodyContainer>
           <ImageContainer key="imageContainer">
-            <Card.Img style={{ borderRadius: '1rem' }} src={data?.imageData != null ? `data:image/png;base64, ${data?.user.imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
+            <Card.Img style={{ borderRadius: '1rem' }} src={community?.imageData != null ? `data:image/png;base64, ${community?.user.imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
           </ImageContainer>
-          <AContainer key="aContainer" href={`/profile/${data?.user.userId}`}>
-            {data?.user.userName}
+          <AContainer key="aContainer" href={`/profile/${community?.user.userId}`}>
+            {community?.user.userName}
           </AContainer>
         </BodyContainer>
       </Card.Body>
-      <Card className="bg-dark" key={data?.communityId}>
-        <CardImageContainer key="cardImageContainer" href={`/community/${data?.communityId}`}>
-          <Card.Img style={{ borderRadius: '.5rem'}} src={data?.imageData != null ? `data:image/png;base64, ${data?.imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
+      <Card className="bg-dark" key={community?.communityId}>
+        <CardImageContainer key="cardImageContainer" href={`/community/${community?.communityId}`}>
+          <Card.Img style={{ borderRadius: '.5rem'}} src={community?.imageData != null ? `data:image/png;base64, ${community?.imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
         </CardImageContainer>
       </Card>
-      <TextContainer key="communityName">{data?.communityName}</TextContainer>
+      <TextContainer key="communityName">{community?.communityName}</TextContainer>
     </CardContainer>
     // <>
     // <Card style={{ position: 'relative', color: 'white'}}>
@@ -128,29 +144,19 @@ function Community({
   );
 }
 
-export const getServerSideProps = (async (context) => {
-    const { id } = context.query;
-    const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/communities/details/${id}`,
-        {
-            method: "GET",
-            headers: {
-                'Accept': 'application/x-www-form-urlencoded',
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            next: { revalidate: 10 }
-        }
-    );
-    const data = await res.json();
-    if (!data) {
-        return {
-            notFound: true,
-        }
-    }
+Community.getInitialProps = wrapper.getInitialPageProps(store => async (context) => {
+  const { id } = context.query;
+  if (typeof id == "string") {
+      await store.dispatch(communityFetchSingleStart(id));
+  }
 
-    return { props: { data }};
-}) satisfies GetServerSideProps<{
-    data: Array<ICommunity>
-}>;
+  // if (!store.getState().placeholderData) {
+  //   store.dispatch(loadData())
+  //   store.dispatch(END)
+  // }
 
-export default Community;
+  // await store.sagaTask.toPromise()
+  return { props: { id } };
+});
+
+export default wrapper.withRedux(Community);

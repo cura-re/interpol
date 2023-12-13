@@ -62,7 +62,7 @@ export type CommunityDeleteteFailed = ActionWithPayload<
    
 export type CommunityFetchSingleStart = ActionWithPayload<
     COMMUNITY_ACTION_TYPES.FETCH_SINGLE_START,
-    { communityId: number }
+    { communityId: string }
 >;
 
 export type CommunityFetchSingleSuccess = ActionWithPayload<
@@ -182,7 +182,7 @@ export const communityDeleteFailed = withMatcher(
 );
 
 export const communityFetchSingleStart = withMatcher(
-    (communityId: number): CommunityFetchSingleStart => 
+    (communityId: string): CommunityFetchSingleStart => 
     createAction(COMMUNITY_ACTION_TYPES.FETCH_SINGLE_START, { communityId })
 );
 

@@ -41,11 +41,11 @@ export class UserProfileCard extends Component<IInterpolUser> {
                                 {communities?.length != null && <hr></hr>}
                                 <>
                                 {
-                                communities?.map(({ communityId, communityName, description, imageSource }: Community) => (
-                                    <AProfileCardContainer href={`/communities/${communityId}`}>
+                                communities?.map(({ communityId, communityName, description, imageData }: Community) => (
+                                    <AProfileCardContainer href={`/community/${communityId}`}>
                                     <Row>
                                         <Col xs={2}>
-                                            <Image style={{ width: '2rem', height: '2rem', objectFit: 'cover' }} src={imageSource}/>
+                                            <Image className="community-image" src={imageData != null ? `data:image/png;base64, ${imageData}` : "https:yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"}/>
                                         </Col>
                                         <Col>
                                             <Card.Text key={communityId}>{communityName}</Card.Text>

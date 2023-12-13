@@ -31,7 +31,7 @@ export type Community = {
     communityName: string;
     description: string;
     modelLink: string;
-    imageSource: string;
+    imageData: string;
     mediaLink: string | null;
     dateCreated: Date;
     user: User;

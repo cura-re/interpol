@@ -30,7 +30,7 @@ const SingleProfile: NextPage<Context> = props => {
         <ProfileContainer>
             <Row lg={2}>
                 <Col style={{ marginBottom: '2rem' }} lg={4}>
-                    <UserProfileCard about={user?.about!} imageData={user?.imageData!} userName={user?.userName!} userId={user?.userId!} />
+                    <UserProfileCard about={user?.about!} imageData={user?.imageData!} userName={user?.userName!} userId={user?.userId!} communities={user?.communities}/>
                 </Col>
                 <Col lg={8}>                
                 <Tabs

@@ -18,14 +18,14 @@ export const BadgeContainer = styled.div`
 `;
 
 export const BodyContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    line-height: 5em;
+  display: flex;
+  flex-direction: row;
+  line-height: 5em;
 `;
 
 export const CardContainer = styled.div`
-    margin: 1rem;
-    color: white;
+  margin: 1rem;
+  color: white;
 `;
 
 export const CardImageContainer = styled.a`

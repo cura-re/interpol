@@ -9,7 +9,7 @@ function Posts({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) { 
   return (
     <CardContainer style={{ margin: 'auto', width: '50%' }} key={data?.index}>
-        <Card key={data?.postId}>
+        <Card bg="dark" key={data?.postId}>
           <Card.Body>
             <BodyContainer>
               <ImageContainer key="imageContainer">
@@ -21,9 +21,9 @@ function Posts({
             </BodyContainer>
           </Card.Body>
           <CardImageContainer key="cardImageContainer" href={`/posts/${data?.postId}`}>
-            <Card.Img style={{ borderRadius: '.5rem', objectFit: 'cover' }} src={data?.imageData != null ? `data:image/png;base64, ${data?.imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
+            <Card.Img style={{ objectFit: 'cover' }} src={data?.imageData != null ? `data:image/png;base64, ${data?.imageData}` : "https://yt3.googleusercontent.com/ytc/AMLnZu-xCUtEweaqIDj8SYIBYyFWy4bKrRxhiiL9nfsw=s900-c-k-c0x00ffffff-no-rj"} />
           </CardImageContainer>
-          <Card.Title key="postContent">{data?.postContent}</Card.Title>
+          <Card.Title style={{ color: 'white' }} key="postContent">{data?.postContent}</Card.Title>
         </Card>
     </CardContainer>
   );

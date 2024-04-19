@@ -14,18 +14,20 @@ class Device extends Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: 1 })
         })
-            .then((response) => response.json())
-            .then((data) => this.setState({ data: data }));
+            // .then((response) => response.json())
+            .then((response) => console.log("response: ", response))
+            // .then((data) => this.setState({ data: data }));
     }
 
     turnOff() {
-        fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/devices/turnOn/0`, {
+        fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/devices/turnOff/0`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: 1 })
         })
-            .then((response) => response.json())
-            .then((data) => this.setState({ data: data }));
+            // .then((response) => response.json())
+            .then((response) => console.log("response: ", response))
+            // .then((data) => this.setState({ data: data }));
     }
 
     componentDidMount() {
